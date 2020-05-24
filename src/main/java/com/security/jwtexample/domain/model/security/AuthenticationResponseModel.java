@@ -1,10 +1,10 @@
-package com.security.jwtexample.model.security;
+package com.security.jwtexample.domain.model.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class AuthenticationResponse {
+public class AuthenticationResponseModel {
     private String jwtToken;
 }

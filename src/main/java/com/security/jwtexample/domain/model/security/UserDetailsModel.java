@@ -1,4 +1,4 @@
-package com.security.jwtexample.model.security;
+package com.security.jwtexample.domain.model.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

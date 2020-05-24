@@ -1,8 +1,8 @@
-package com.security.jwtexample.core.security;
+package com.security.jwtexample.application.security;
 
-import com.security.jwtexample.core.util.JwtUtil;
-import com.security.jwtexample.model.security.UserDetailsModel;
-import com.security.jwtexample.service.MyUserDetailsService;
+import com.security.jwtexample.infra.util.JwtUtil;
+import com.security.jwtexample.domain.model.security.UserDetailsModel;
+import com.security.jwtexample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +21,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     private static final String HEADER_AUTHORIZATION = "Authorization";
 
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private UserService userService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -32,7 +32,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             String token = authorizationHeader.replace(HEADER_TOKEN_PREFIX, "");
             String username = JwtUtil.getUsernameFromToken(token);
 
-            UserDetailsModel userDetails = myUserDetailsService.loadUserByUsername(username);
+            UserDetailsModel userDetails = userService.loadUserByUsername(username);
 
             if (JwtUtil.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

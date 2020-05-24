@@ -1,6 +1,6 @@
-package com.security.jwtexample.core.security;
+package com.security.jwtexample.application.security;
 
-import com.security.jwtexample.service.MyUserDetailsService;
+import com.security.jwtexample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 class WebSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private UserService userDetailsService;
 
     @Autowired
     private JwtAuthorizationFilter jwtFilter;

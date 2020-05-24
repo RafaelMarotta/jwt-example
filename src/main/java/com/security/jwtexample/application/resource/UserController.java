@@ -1,9 +1,9 @@
-package com.security.jwtexample.controller;
+package com.security.jwtexample.application.resource;
 
-import com.security.jwtexample.core.util.JwtUtil;
-import com.security.jwtexample.model.security.AuthenticationRequest;
-import com.security.jwtexample.model.security.UserDetailsModel;
-import com.security.jwtexample.service.MyUserDetailsService;
+import com.security.jwtexample.infra.util.JwtUtil;
+import com.security.jwtexample.domain.model.security.AuthenticationRequestModel;
+import com.security.jwtexample.domain.model.security.UserDetailsModel;
+import com.security.jwtexample.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,19 +21,23 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
 
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private UserService userDetailsService;
 
     @PostMapping("/login")
-    public ResponseEntity doLogin(@RequestBody AuthenticationRequest dto) {
+    public ResponseEntity doLogin(@RequestBody AuthenticationRequestModel dto) {
+
         try {
+
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword());
             authenticationManager.authenticate(authentication);
+
         } catch (BadCredentialsException ex) {
             return ResponseEntity.badRequest().body("Usuário ou senha incorretos!");
         }
 
         UserDetailsModel userDetailsModel = userDetailsService.loadUserByUsername(dto.getUsername());
         String token = JwtUtil.generateToken(userDetailsModel);
+
         return ResponseEntity.ok(token);
     }
 

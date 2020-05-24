@@ -1,4 +1,4 @@
-package com.security.jwtexample.core.util;
+package com.security.jwtexample.infra.util;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
-import java.util.function.BinaryOperator;
 
 public class JwtUtil {
     private static final int EXPIRATION_TIME = 1000 * 60 * 60;
