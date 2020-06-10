@@ -1,8 +1,7 @@
 package com.security.jwtexample.application.resource;
 
-import com.security.jwtexample.infra.util.JwtUtil;
-import com.security.jwtexample.domain.model.security.AuthenticationRequestModel;
-import com.security.jwtexample.domain.model.security.UserDetailsModel;
+import com.security.jwtexample.model.security.AuthenticationResponseModel;
+import com.security.jwtexample.model.security.AuthenticationRequestModel;
 import com.security.jwtexample.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +34,9 @@ public class UserController {
             return ResponseEntity.badRequest().body("Usuário ou senha incorretos!");
         }
 
-        UserDetailsModel userDetailsModel = userDetailsService.loadUserByUsername(dto.getUsername());
-        String token = JwtUtil.generateToken(userDetailsModel);
+        AuthenticationResponseModel tokenDTO = userDetailsService.generateTokenByUsername(dto);
 
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(tokenDTO);
     }
 
     @GetMapping("/teste")

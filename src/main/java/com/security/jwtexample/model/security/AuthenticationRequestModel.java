@@ -1,4 +1,4 @@
-package com.security.jwtexample.domain.model.security;
+package com.security.jwtexample.model.security;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.security.jwtexample.infra.util;
+package com.security.jwtexample.util;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -10,12 +10,14 @@ import java.util.Collection;
 import java.util.Date;
 
 public class JwtUtil {
+
     private static final int EXPIRATION_TIME = 1000 * 60 * 60;
     private static final String AUTHORITIES = "authorities";
     private static String SECRET_KEY = "minhasecret";
 
     public static String generateToken(UserDetails userDetails) {
         String username = userDetails.getUsername();
+
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
 
         return Jwts.builder()

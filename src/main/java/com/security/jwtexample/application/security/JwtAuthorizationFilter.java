@@ -1,7 +1,7 @@
 package com.security.jwtexample.application.security;
 
-import com.security.jwtexample.infra.util.JwtUtil;
-import com.security.jwtexample.domain.model.security.UserDetailsModel;
+import com.security.jwtexample.util.JwtUtil;
+import com.security.jwtexample.model.security.UserDetailsModel;
 import com.security.jwtexample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
