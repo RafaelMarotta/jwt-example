@@ -32,4 +32,5 @@ public class UserDetailsModel implements UserDetails {
 
     @Builder.Default
     private boolean enabled = true;
+
 }

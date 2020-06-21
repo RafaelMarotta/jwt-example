@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
+
     private final AuthenticationManager authenticationManager;
 
     @Autowired
@@ -37,6 +38,7 @@ public class UserController {
         AuthenticationResponseModel tokenDTO = userDetailsService.generateTokenByUsername(dto);
 
         return ResponseEntity.ok(tokenDTO);
+
     }
 
     @GetMapping("/teste")

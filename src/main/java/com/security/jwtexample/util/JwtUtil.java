@@ -16,6 +16,7 @@ public class JwtUtil {
     private static String SECRET_KEY = "minhasecret";
 
     public static String generateToken(UserDetails userDetails) {
+
         String username = userDetails.getUsername();
 
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
@@ -26,27 +27,34 @@ public class JwtUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS256, encodeBase64(SECRET_KEY))
                 .compact();
+
     }
 
     public static String getUsernameFromToken(String token) {
+
         return Jwts.parser()
                 .setSigningKey(encodeBase64(SECRET_KEY))
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+
     }
 
     public static Boolean validateToken(String token, UserDetails userDetails) {
+
         return getUsernameFromToken(token).equals(userDetails.getUsername()) && !hasTokenExpired(token);
+
     }
 
     private static Boolean hasTokenExpired(String token) {
+
         return Jwts.parser()
                 .setSigningKey(encodeBase64(SECRET_KEY))
                 .parseClaimsJws(token)
                 .getBody()
                 .getExpiration()
                 .before(new Date());
+
     }
 
     public static String encodeBase64(String text) {

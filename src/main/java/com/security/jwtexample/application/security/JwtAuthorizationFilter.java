@@ -17,6 +17,7 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
+
     private static final String HEADER_TOKEN_PREFIX = "Bearer";
     private static final String HEADER_AUTHORIZATION = "Authorization";
 
@@ -25,6 +26,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+
         String authorizationHeader = request.getHeader(HEADER_AUTHORIZATION);
 
         if (authorizationHeader != null && authorizationHeader.startsWith(HEADER_TOKEN_PREFIX)) {
@@ -41,5 +43,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         }
 
         chain.doFilter(request, response);
+
     }
+
 }
